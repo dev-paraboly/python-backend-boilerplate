@@ -11,16 +11,16 @@ cp .env.example .env
 pip install -r requirements.txt
 ```
 ## Running
-- Run project by `uvicorn {{cookiecutter.app_name}}_service.main:app --reload --host=0.0.0.0`
-- Check the documentation at http://0.0.0.0:8000/v1/{{cookiecutter.app_name}}/docs
+- Run project by `uvicorn {{cookiecutter.app_name.replace("-", "_")}}_service.main:app --reload --host=0.0.0.0`
+- Check the documentation at http://0.0.0.0:8000/v1/{{cookiecutter.app_name.replace("-", "_")}}/docs
 
 # What is next?
 ## Routes and API wise
-- You probably want to change the directory at `{{cookiecutter.app_name}}_service/api/v1/book_service` to something more meaningful.
-- For creating a new service, you can use `{{cookiecutter.app_name}}_service/api/v1/book_service` as a base.
+- You probably want to change the directory at `{{cookiecutter.app_name.replace("-", "_")}}_service/api/v1/book_service` to something more meaningful.
+- For creating a new service, you can use `{{cookiecutter.app_name.replace("-", "_")}}_service/api/v1/book_service` as a base.
 - After creating a new service, include its router inside the `main.py` file
 - Your new routers need to inherit from `GenericRouter` class.
-- Don't forget to add your database models in `{{cookiecutter.app_name}}_service/models/`. Feel free to remove `book.py`
+- Don't forget to add your database models in `{{cookiecutter.app_name.replace("-", "_")}}_service/models/`. Feel free to remove `book.py`
 
 ## Continious integration
 - Enter your NPM key at the dockerfile. It is required for creating and deploying the SDK. Search for _NPM_KEY in the file.
@@ -31,8 +31,8 @@ pip install -r requirements.txt
 ### Backend side
 - Add these lines to your `docker-compose.yml` file which holds your backend services
 ```yaml
-  {{cookiecutter.app_name}}_service:
-    image: eu.gcr.io/YOUR_GCP_PROJECT/{{cookiecutter.app_name}}:latest
+  {{cookiecutter.app_name.replace("-", "_")}}_service:
+    image: eu.gcr.io/YOUR_GCP_PROJECT/{{cookiecutter.app_name.replace("-", "_")}}:latest
     ports:
       - AN_AVAILABLE_PORT:80
     environment:
@@ -43,21 +43,21 @@ pip install -r requirements.txt
       POSTGRE_DBNAME: postgre
       PORT: 80
       BUILD: PROD
-      MODULE_NAME: {{cookiecutter.app_name}}_service.main
+      MODULE_NAME: {{cookiecutter.app_name.replace("-", "_")}}_service.main
     restart: always
 
 ```
-- Run `docker-compose up {{cookiecutter.app_name}}_service -d`
+- Run `docker-compose up {{cookiecutter.app_name.replace("-", "_")}}_service -d`
 
 ### Nginx configuration
 - Add these lines to your `nginx.conf.template` file, inside the `server {` block:
 ```nginx
 # This needs to go to the top
-set ${{cookiecutter.app_name}} "${{"{"}}{{cookiecutter.app_name.upper()}}_API}";
+set ${{cookiecutter.app_name.replace("-", "_")}} "${{"{"}}{{cookiecutter.app_name.upper()}}_API}";
 
 # This needs to go to the bottom, just above your generic handler.
-location ~ /v1/{{cookiecutter.app_name}} {
-    proxy_pass ${{cookiecutter.app_name}}$request_uri;
+location ~ /v1/{{cookiecutter.app_name.replace("-", "_")}} {
+    proxy_pass ${{cookiecutter.app_name.replace("-", "_")}}$request_uri;
 }
 ```
 - Add following environment variable to your nginx's `docker-compose.yml` file:
@@ -68,5 +68,5 @@ location ~ /v1/{{cookiecutter.app_name}} {
 - Run `docker-compose up nginx -d`
 
 ## Getting the SDK
-- If you have done every previous step correctly, you should be able to access your SDK at https://www.npmjs.com/package/@paraboly/{{cookiecutter.app_name}}_sdk. You can remove the `@paraboly` part. For that, edit `publish.sh` and `Dockerfile`.
-- You can also install the SDK by running `npm install @paraboly/{{cookiecutter.app_name}}_sdk`
+- If you have done every previous step correctly, you should be able to access your SDK at https://www.npmjs.com/package/@paraboly/{{cookiecutter.app_name.replace("-", "_")}}_sdk. You can remove the `@paraboly` part. For that, edit `publish.sh` and `Dockerfile`.
+- You can also install the SDK by running `npm install @paraboly/{{cookiecutter.app_name.replace("-", "_")}}_sdk`

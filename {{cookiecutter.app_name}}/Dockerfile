@@ -26,7 +26,7 @@ RUN ./usr/local/bin/docker-entrypoint.sh generate \
     -i=openapi.json \
     -g=typescript-axios \
     -o=/sdk \
-    --additional-properties npmName={{cookiecutter.app_name}}_sdk \
+    --additional-properties npmName={{cookiecutter.app_name.replace("-", "_")}}_sdk \
     --skip-validate-spec
 
 # Pack SDK to a tar file

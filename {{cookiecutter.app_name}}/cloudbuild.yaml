@@ -3,19 +3,19 @@ steps:
     args:
     - build
     - -t
-    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name}}:$COMMIT_SHA
+    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
     - -t
-    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name}}:latest
+    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
     - .
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name}}:latest
+      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name}}:$COMMIT_SHA
-  - name: ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name}}:latest
+      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
+  - name: ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
     entrypoint: /bin/sh
     args:
       - -c
@@ -29,5 +29,5 @@ artifacts:
     paths: ["final-sdk/*.tgz"]
 substitutions:
   _IMAGE_BASE: eu.gcr.io
-  _OPENAPI_URL: http://tto.test.internal.paraboly.com/v1/{{cookiecutter.app_name}}/openapi.json
+  _OPENAPI_URL: http://tto.test.internal.paraboly.com/v1/{{cookiecutter.app_name.replace("-", "_")}}/openapi.json
   _BUCKET_NAME: tto-js-clients

@@ -1,7 +1,7 @@
 from fastapi.params import Depends
 
-from {{cookiecutter.app_name}}_service.middlewares import db_session_middleware
-from {{cookiecutter.app_name}}_service.interfaces.generic_router import GenericRouter
+from {{cookiecutter.app_name.replace("-", "_")}}_service.middlewares import db_session_middleware
+from {{cookiecutter.app_name.replace("-", "_")}}_service.interfaces.generic_router import GenericRouter
 
 from .service import BookService
 

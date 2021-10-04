@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
-from {{cookiecutter.app_name}}_service.middlewares import db_session_middleware
-from {{cookiecutter.app_name}}_service.models.book import Book
+from {{cookiecutter.app_name.replace("-", "_")}}_service.middlewares import db_session_middleware
+from {{cookiecutter.app_name.replace("-", "_")}}_service.models.book import Book
 
 
 class BookRepository:

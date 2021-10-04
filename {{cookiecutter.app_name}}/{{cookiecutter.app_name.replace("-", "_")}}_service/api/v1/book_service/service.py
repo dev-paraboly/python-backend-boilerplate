@@ -1,4 +1,4 @@
-from {{cookiecutter.app_name}}_service.middlewares import db_session_middleware
+from {{cookiecutter.app_name.replace("-", "_")}}_service.middlewares import db_session_middleware
 
 from .repository import BookRepository
 

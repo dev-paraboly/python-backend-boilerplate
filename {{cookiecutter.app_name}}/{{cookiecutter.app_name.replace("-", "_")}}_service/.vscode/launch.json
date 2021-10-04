@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "{{cookiecutter.app_name}}_service.main:app"
+                "{{cookiecutter.app_name.replace("-", "_")}}_service.main:app"
             ],
             "jinja": true
         }

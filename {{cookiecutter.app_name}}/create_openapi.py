@@ -1,5 +1,5 @@
 from fastapi.openapi.utils import get_openapi
-from {{cookiecutter.app_name}}_service.main import app
+from {{cookiecutter.app_name.replace("-", "_")}}_service.main import app
 
 import json
 
