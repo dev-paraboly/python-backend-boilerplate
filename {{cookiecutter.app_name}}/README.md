@@ -1,0 +1,1 @@
+# Run project by `uvicorn {{cookiecutter.app_name}}.main:app --reload --host=0.0.0.0`
