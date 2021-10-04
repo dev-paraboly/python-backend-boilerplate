@@ -32,7 +32,7 @@ pip install -r requirements.txt
 - Add these lines to your `docker-compose.yml` file which holds your backend services
 ```yaml
   {{cookiecutter.app_name}}_service:
-    image: eu.gcr.io/YOUR_GCP_PROJECT]]/{{cookiecutter.app_name}}:latest
+    image: eu.gcr.io/YOUR_GCP_PROJECT/{{cookiecutter.app_name}}:latest
     ports:
       - AN_AVAILABLE_PORT:80
     environment:
@@ -53,7 +53,7 @@ pip install -r requirements.txt
 - Add these lines to your `nginx.conf.template` file, inside the `server {` block:
 ```nginx
 # This needs to go to the top
-set ${{cookiecutter.app_name}} "${{{cookiecutter.app_name}}_API}";
+set ${{cookiecutter.app_name}} "${{"{"}}{{cookiecutter.app_name.upper()}}_API}";
 
 # This needs to go to the bottom, just above your generic handler.
 location ~ /v1/{{cookiecutter.app_name}} {
@@ -63,7 +63,7 @@ location ~ /v1/{{cookiecutter.app_name}} {
 - Add following environment variable to your nginx's `docker-compose.yml` file:
 ```yaml
     environment:
-        - {{cookiecutter.app_name}}_API=http://ADDRESS_OF_YOUR_BACKEND:THE_AVAILABLE_PORT_YOU_HAVE_SET_IN_DOCKER_COMPOSE
+        - {{cookiecutter.app_name.upper()}}_API=http://ADDRESS_OF_YOUR_BACKEND:THE_AVAILABLE_PORT_YOU_HAVE_SET_IN_DOCKER_COMPOSE
 ```
 - Run `docker-compose up nginx -d`
 
