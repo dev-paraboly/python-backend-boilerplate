@@ -1,4 +1,4 @@
-from fastapi.params import Depends, Body
+from fastapi.params import Depends
 
 from {{cookiecutter.app_name}}_service.middlewares import db_session_middleware
 from {{cookiecutter.app_name}}_service.interfaces.generic_router import GenericRouter

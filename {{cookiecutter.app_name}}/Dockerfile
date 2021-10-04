@@ -41,7 +41,7 @@ COPY --from=create-json /app/openapi.json /publish/
 ENV _NPM_KEY="ENTER YOUR NPM KEY HERE"
 
 RUN echo ${_NPM_KEY} >> /root/.npmrc &&\
-      node --eval='const package=require("./package.json");package.name="@paraboly/"+package.name;console.log(JSON.stringify(package));' \
+      node --eval='const package=require("./package.json");package.name="@paraboly/"+package.name+"_sdk";console.log(JSON.stringify(package));' \
         >> temp.json &&\
       mv temp.json package.json
 

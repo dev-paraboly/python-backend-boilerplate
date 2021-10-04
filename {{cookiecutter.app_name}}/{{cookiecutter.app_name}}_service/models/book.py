@@ -13,7 +13,7 @@ class Book(Base):
     book_id: str = Column(String, primary_key=True)
     author: str = Column(String, primary_key=True)
     book_name: str = Column(String, primary_key=False)
-    descrtiption: str = Column(String, primary_key=False)
+    description: str = Column(String, primary_key=False)
 
     def __repr__(self) -> str:
         return json.dumps(self.dict())
