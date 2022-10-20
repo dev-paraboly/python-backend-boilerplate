@@ -8,7 +8,11 @@ cp .env.example .env
 ```
 - Create a new virtual python environment, and install the dependencies.
 ```bash
-pip install -r requirements.txt
+poetry install
+
+poetry config virtualenvs.create true (use this incase of an error to create virtual environment)
+
+poetry shell
 ```
 ## Running
 - Run project by `uvicorn {{cookiecutter.app_name.replace("-", "_")}}_service.main:app --reload --host=0.0.0.0`
