@@ -6,11 +6,15 @@ This project is a boilerplate for a new Python/FastApi project. It has a single 
 ```bash
 cp .env.example .env
 ```
+- Close other virtual environment if there is.
+
 - Create a new virtual python environment, and install the dependencies.
 ```bash
 poetry install
 
-poetry config virtualenvs.create true (use this incase of an error to create virtual environment)
+Note : If your virtual environment is created you do not need to use these two command.
+
+poetry config virtualenvs.create true 
 
 poetry shell
 ```
