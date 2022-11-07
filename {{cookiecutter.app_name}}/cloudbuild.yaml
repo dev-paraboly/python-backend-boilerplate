@@ -15,19 +15,6 @@ steps:
     args:
       - push
       - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
-  - name: ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
-    entrypoint: /bin/sh
-    args:
-      - -c
-      - |
-        set -eux
-        mkdir /workspace/final-sdk/
-        cp -r /sdk/*.tgz /workspace/final-sdk/
-artifacts:
-  objects:
-    location: gs://${_BUCKET_NAME}/
-    paths: ["final-sdk/*.tgz"]
+
 substitutions:
   _IMAGE_BASE: eu.gcr.io
-  _OPENAPI_URL: http://tto.test.internal.paraboly.com/v1/{{cookiecutter.app_name.replace("-", "_")}}/openapi.json
-  _BUCKET_NAME: tto-js-clients
