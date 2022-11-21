@@ -5,12 +5,12 @@ steps:
     - -t
     - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
     - -t
-    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
+    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:stable
     - .
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
+      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:stable
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
