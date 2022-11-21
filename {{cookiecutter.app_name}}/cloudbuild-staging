@@ -1,0 +1,20 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+    - build
+    - -t
+    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
+    - -t
+    - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
+    - .
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - push
+      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:latest
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - push
+      - ${_IMAGE_BASE}/${PROJECT_ID}/{{cookiecutter.app_name.replace("-", "_")}}:$COMMIT_SHA
+
+substitutions:
+  _IMAGE_BASE: eu.gcr.io
