@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "backend-api"
+name = "{{cookiecutter.app_name.replace("-", "_")}}-api"
 version = "0.1.0"
 description = "api"
 authors = ["you"]
