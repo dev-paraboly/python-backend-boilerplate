@@ -1,9 +1,16 @@
 import {{cookiecutter.app_name.replace("-", "_")}}_service.settings
 
 import uvicorn
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, Depends
 
 from {{cookiecutter.app_name.replace("-", "_")}}_service.api.v1.book_service.router import BookRouter
+from .auth import get_auth
+
+auth_dependencies = []
+# For development purposes, can be improved
+if os.getenv("ENV") != 'dev':
+    auth_dependencies.append(Depends(get_auth))
 
 VERSION = "1.0.0"
 
@@ -19,6 +26,7 @@ sub_app = FastAPI(
     description="Backend service developed using fastapi",
     docs_url="/docs",
     openapi_url="/openapi.json",
+    dependencies=auth_dependencies
 )
 
 sub_app.include_router(BookRouter().get_router(), prefix="/book_service")
