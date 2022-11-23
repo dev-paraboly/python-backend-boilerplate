@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "{{cookiecutter.app_name.replace("-", "_")}}-api"
+name = "backend-api"
 version = "0.1.0"
 description = "api"
 authors = ["you"]
@@ -20,6 +20,7 @@ python-jose = "^3.3.0"
 python-multipart = "^0.0.5"
 pydantic = {extras = ["dotenv"], version = "^1.10.2"}
 sentry-sdk = "^1.10.0"
+jose = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.7.0"
